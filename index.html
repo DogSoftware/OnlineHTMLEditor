@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online HTML Editor</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f6f6f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  #editor-container {
+    display: flex;
+    margin-top: 20px;
+    width: 80%;
+    max-width: 1000px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  #html-editor, #output {
+    flex: 1;
+    height: 400px;
+    box-sizing: border-box;
+    padding: 20px;
+    font-size: 14px;
+    border: none;
+    background-color: #fff;
+  }
+  #html-editor {
+    border-right: 1px solid #e0e0e0;
+  }
+  #output {
+    background-color: #f8f8f8;
+  }
+  h1 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <h1>Online HTML Editor</h1>
+  <div id="editor-container">
+    <textarea id="html-editor" placeholder="Paste your HTML code here or start writing!">
+      &lt;!DOCTYPE html&gt;
+      &lt;html&gt;
+      &lt;head&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+      &lt;h1&gt;Welcome to the Online HTML Editor&lt;/h1&gt;
+      &lt;p&gt;Paste your HTML code here or start writing!&lt;/p&gt;
+      &lt;/body&gt;
+      &lt;/html&gt;
+    </textarea>
+    <iframe id="output" sandbox="allow-scripts allow-same-origin"></iframe>
+  </div>
+  <script>
+    const htmlEditor = document.getElementById('html-editor');
+    const outputFrame = document.getElementById('output');
+
+    function updateOutput() {
+      const code = htmlEditor.value;
+      const doc = outputFrame.contentDocument || outputFrame.contentWindow.document;
+      doc.open();
+      doc.write(code);
+      doc.close();
+    }
+
+    htmlEditor.addEventListener('input', updateOutput);
+
+    updateOutput(); // Initial rendering
+  </script>
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</body>
+</html>
